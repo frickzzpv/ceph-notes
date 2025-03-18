@@ -1,8 +1,8 @@
 # Ceph Command Cheat Sheet
 
 ## Most Used Ceph Commands
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph -s`                                   | Displays the cluster status (health, monitors, OSDs, PGs, etc.).           | `ceph -s`                                         |
 | `ceph health detail`                        | Provides detailed health status of the cluster.                            | `ceph health detail`                              |
 | `ceph osd status`                           | Shows the status of OSDs (up, down, in, out).                              | `ceph osd status`                                 |
@@ -13,7 +13,7 @@
 | `ceph mon stat`                             | Shows monitor status (quorum, leader, etc.).                               | `ceph mon stat`                                   |
 | `ceph osd pool ls`                          | Lists all storage pools in the cluster.                                    | `ceph osd pool ls`                                |
 | `ceph osd pool create <poolname> <pg_num>`  | Creates a new storage pool with specified PGs (e.g., 64).                  | `ceph osd pool create mypool 64`                  |
-| `ceph osd pool delete <poolname> <poolname> --yes-i-really-really-mean-it` | Deletes a pool (requires confirmation).             | `ceph osd pool delete mypool mypool --yes-i-really-really-mean-it` |
+| `ceph osd pool delete <poolname> <poolname> --yes-i-really-really-mean-it` | Deletes a pool (requires confirmation).     | `ceph osd pool delete mypool mypool --yes-i-really-really-mean-it` |
 | `ceph tell osd.<id> version`                | Checks the version of a specific OSD.                                      | `ceph tell osd.0 version`                         |
 | `ceph quorum_status`                        | Shows the quorum status of the monitor nodes.                              | `ceph quorum_status`                              |
 | `ceph osd crush reweight osd.<id> <weight>` | Adjusts the CRUSH weight of an OSD (e.g., 1.0).                            | `ceph osd crush reweight osd.1 1.5`               |
@@ -24,8 +24,8 @@
 ## All Commands (Extended List)
 
 ### Cluster Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph version`                              | Displays the Ceph version running on the cluster.                          | `ceph version`                                    |
 | `ceph status`                               | Alias for `ceph -s` (short cluster status).                                | `ceph status`                                     |
 | `ceph orch status`                          | Shows the status of the Ceph orchestrator (if enabled).                    | `ceph orch status`                                |
@@ -36,8 +36,8 @@
 | `ceph report`                               | Generates a detailed cluster report (useful for debugging).                | `ceph report`                                     |
 
 ### OSD Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph osd ls`                               | Lists all OSD IDs in the cluster.                                          | `ceph osd ls`                                     |
 | `ceph osd down <osd-id>`                    | Marks an OSD as down.                                                      | `ceph osd down 2`                                 |
 | `ceph osd out <osd-id>`                     | Marks an OSD as out of the cluster (stops data allocation).                | `ceph osd out 3`                                  |
@@ -52,26 +52,26 @@
 | `ceph osd perf`                             | Displays OSD performance stats (latency, commit times).                    | `ceph osd perf`                                   |
 
 ### Pool Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
-| `ceph osd pool get <poolname> <key>`        | Gets a pool property (e.g., `size`, `pg_num`).                             | `ceph osd pool get mypool size`                   |
-| `ceph osd pool set <poolname> <key> <value>`| Sets a pool property (e.g., replication size).                             | `ceph osd pool set mypool size 3`                 |
-| `ceph osd pool stats <poolname>`            | Shows statistics for a specific pool.                                      | `ceph osd pool stats mypool`                      |
-| `ceph osd pool rename <oldname> <newname>`  | Renames an existing pool.                                                  | `ceph osd pool rename mypool newpool`             |
-| `ceph osd pool set-quota <poolname> max_bytes <bytes>` | Sets a byte quota for a pool.                           | `ceph osd pool set-quota mypool max_bytes 10G`    |
-| `ceph osd pool set-quota <poolname> max_objects <num>` | Sets an object quota for a pool.                        | `ceph osd pool set-quota mypool max_objects 1000` |
+| Command                                      | Description                                                                | Example                                           |
+|----------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
+| `ceph osd pool get <poolname> <key>`         | Gets a pool property (e.g., `size`, `pg_num`).                             | `ceph osd pool get mypool size`                   |
+| `ceph osd pool set <poolname> <key> <value>` | Sets a pool property (e.g., replication size).                             | `ceph osd pool set mypool size 3`                 |
+| `ceph osd pool stats <poolname>`             | Shows statistics for a specific pool.                                      | `ceph osd pool stats mypool`                      |
+| `ceph osd pool rename <oldname> <newname>`   | Renames an existing pool.                                                  | `ceph osd pool rename mypool newpool`             |
+| `ceph osd pool set-quota <poolname> max_bytes <bytes>` | Sets a byte quota for a pool.                                    | `ceph osd pool set-quota mypool max_bytes 10G`    |
+| `ceph osd pool set-quota <poolname> max_objects <num>` | Sets an object quota for a pool.                                 | `ceph osd pool set-quota mypool max_objects 1000` |
 
 ### Monitor Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph mon dump`                             | Dumps monitor map details.                                                 | `ceph mon dump`                                   |
 | `ceph mon getmap -o monmap`                 | Exports the monitor map to a file (`monmap`).                              | `ceph mon getmap -o /tmp/monmap`                  |
 | `ceph mon add <mon-id> <ip:port>`           | Adds a new monitor to the cluster.                                         | `ceph mon add mon3 192.168.1.103:6789`            |
 | `ceph mon remove <mon-id>`                  | Removes a monitor from the cluster.                                        | `ceph mon remove mon2`                            |
 
 ### Placement Group (PG) Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph pg dump`                              | Dumps detailed PG information (states, sizes, etc.).                       | `ceph pg dump`                                    |
 | `ceph pg scrub <pg-id>`                     | Scrubs a specific placement group (checks data integrity).                 | `ceph pg scrub 1.1a`                              |
 | `ceph pg repair <pg-id>`                    | Repairs a specific placement group (attempts to fix inconsistencies).      | `ceph pg repair 1.1a`                             |
@@ -80,8 +80,8 @@
 | `ceph pg ls <state>`                        | Lists PGs in a specific state (e.g., degraded, stale).                     | `ceph pg ls degraded`                             |
 
 ### Authentication and Client Management
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph auth get-key client.<id>`             | Retrieves the key for a specific client.                                   | `ceph auth get-key client.admin`                  |
 | `ceph auth add client.<id> <caps>`          | Adds a client with specified capabilities.                                 | `ceph auth add client.user mon 'allow r' osd 'allow rw'` |
 | `ceph auth del client.<id>`                 | Deletes a client’s authentication entry.                                   | `ceph auth del client.user`                       |
@@ -90,8 +90,8 @@
 | `ceph auth get-or-create <entity>`          | Creates or retrieves an entity with specified caps if it doesn’t exist.    | `ceph auth get-or-create client.new mon 'allow r'`|
 
 ### Troubleshooting and Maintenance
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph tell osd.<id> flush_pg_stats`         | Flushes PG stats for a specific OSD.                                       | `ceph tell osd.0 flush_pg_stats`                  |
 | `ceph log`                                  | Shows the cluster log (recent events).                                     | `ceph log`                                        |
 | `ceph osd blocked-by`                       | Identifies OSDs blocking recovery or rebalancing.                          | `ceph osd blocked-by`                             |
@@ -100,8 +100,8 @@
 | `ceph daemon <daemon> config show`          | Shows the running configuration of a specific daemon.                      | `ceph daemon osd.0 config show`                   |
 
 ### RBD (RADOS Block Device) Commands
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `rbd create <pool>/<image> --size <size>`   | Creates an RBD image.                                                      | `rbd create mypool/myimage --size 10G`            |
 | `rbd ls <pool>`                             | Lists RBD images in a pool.                                                | `rbd ls mypool`                                   |
 | `rbd info <pool>/<image>`                   | Shows details of an RBD image.                                             | `rbd info mypool/myimage`                         |
@@ -112,11 +112,11 @@
 | `rbd snap create <pool>/<image>@<snap>`     | Creates a snapshot of an RBD image.                                        | `rbd snap create mypool/myimage@snap1`            |
 
 ### CephFS (MDS) Commands
-| Command                                      | Description                                                                 | Example                                           |
-|----------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| Command                                     | Description                                                                | Example                                           |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | `ceph mds stat`                             | Shows MDS (Metadata Server) status.                                        | `ceph mds stat`                                   |
 | `ceph fs ls`                                | Lists all CephFS filesystems.                                              | `ceph fs ls`                                      |
-| `ceph fs new <fs_name> <metadata_pool> <data_pool>` | Creates a new CephFS filesystem.                                    | `ceph fs new myfs metadata_pool data_pool`        |
+| `ceph fs new <fs_name> <metadata_pool> <data_pool>` | Creates a new CephFS filesystem.                                   | `ceph fs new myfs metadata_pool data_pool`        |
 
 ## Notes
 - Examples assume a cluster with OSDs numbered 0-5, monitors like `mon1`, `mon2`, etc., and a pool named `mypool`.
